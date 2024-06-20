@@ -1,0 +1,12 @@
+.upload-custom,
+.upload-custom>.ant-upload,
+.upload-custom>.ant-upload-list,
+.upload-custom>.ant-upload-list>.ant-upload-select,
+.upload-custom>.ant-upload-list>.ant-upload-list-item-container {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.upload-custom>.ant-upload-wrapper .ant-upload-list.ant-upload-list-picture .ant-upload-list-item {
+    padding: 0px;
+}
