@@ -1,11 +1,12 @@
-// export const BASE_URL = 'http://localhost:8080'
-export const BASE_URL = 'https://backendfashionshoes-production.up.railway.app'
+export const BASE_URL = 'http://localhost:8080'
+// export const BASE_URL = 'https://backendfashionshoes-production.up.railway.app'
 
 export const MALE = 'MALE'
 
 export const FEMALE = 'FEMALE'
 
 export const APP_URLS = {
+    URL_DASHBOARD: '/dashboard',
     URL_LOGIN: '/login',
     URL_PRODUCTS: '/products',
     URL_FORGOT_PASS: '/forgot-password',

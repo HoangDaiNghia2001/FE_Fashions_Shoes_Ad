@@ -26,6 +26,13 @@ export default ({ paging },
             width: 65,
             align: 'center'
         }, {
+            title: 'Code',
+            dataIndex: 'code',
+            key: 'code',
+            width: 170,
+            align: 'center',
+            hidden: hiddenColumn
+        }, {
             title: 'Create at',
             dataIndex: 'createdAt',
             key: 'createdAt',

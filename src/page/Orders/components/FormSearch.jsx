@@ -5,8 +5,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { getDistrictByProvinceAsync, getProvinceAsync, getWardByDistrictAsync } from "../OrdersSlice";
 const { RangePicker } = DatePicker;
-const dateFormat = 'DD/MM/YYYY'
-    ;
+const dateFormat = 'DD/MM/YYYY';
 const FormSearch = (props) => {
 
     const { hiddenColumn, setHiddenColumn, formSearchOrder, setPaging } = props
@@ -89,10 +88,10 @@ const FormSearch = (props) => {
 
     const getProvinces = async () => {
         const response = await dispatch(getProvinceAsync())
-        setProvinces(response.payload.map((item) => {
+        setProvinces(response.payload.data.map((item) => {
             return {
-                value: item.code,
-                label: item.name
+                value: item.ProvinceID,
+                label: item.ProvinceName
             }
         }))
     }
@@ -100,10 +99,10 @@ const FormSearch = (props) => {
     const getDistrictByProvince = async (value) => {
         if (value) {
             const response = await dispatch(getDistrictByProvinceAsync(value))
-            setDistricts(response.payload.districts?.map((item) => {
+            setDistricts(response.payload.data?.map((item) => {
                 return {
-                    value: item.code,
-                    label: item.name
+                    value: item.DistrictID,
+                    label: item.DistrictName
                 }
             }))
         }
@@ -112,10 +111,11 @@ const FormSearch = (props) => {
     const getWardByDistrict = async (value) => {
         if (value) {
             const response = await dispatch(getWardByDistrictAsync(value))
-            setWards(response.payload.wards?.map((item) => {
+            console.log(response)
+            setWards(response.payload.data?.map((item) => {
                 return {
-                    value: item.code,
-                    label: item.name
+                    value: item.WardCode,
+                    label: item.WardName
                 }
             }))
         }

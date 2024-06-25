@@ -23,7 +23,7 @@ const LoginForm = (props) => {
         if (response.payload.success) {
             formLogin.resetFields()
             localStorage.setItem("admin", JSON.stringify(response.payload.results))
-            navigate(APP_URLS.URL_ORDERS)
+            navigate(APP_URLS.URL_DASHBOARD)
         } else {
             switch (response.payload.status) {
                 case 500:

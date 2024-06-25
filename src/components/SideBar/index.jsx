@@ -8,64 +8,73 @@ import comment from 'assets/Image/comment.png'
 import account from 'assets/Image/account.png'
 import brand from 'assets/Image/brand.png'
 import orders from 'assets/Image/orders.png'
+import dashboard from 'assets/Image/dashboard.png'
 import key from 'assets/Image/key.png'
 import './Style.css'
 
 const SideBar = (props) => {
 
-    const items = [
-        {
-            key: 5,
-            label: <NavLink to={APP_URLS.URL_ORDERS} className="sidebar--item flex text-[16px] pl-4 py-3">
-                <span></span>
-                <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={orders} alt="" />
-                Orders
-            </NavLink>
-        }, {
-            key: 1,
-            label: <NavLink to={APP_URLS.URL_PRODUCTS} className="sidebar--item flex text-[16px] w-full h-full pl-4 py-3">
-                <span></span>
-                <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={iconShoe} alt="" />
-                Products
-            </NavLink>
+    const items = [{
+        key: 0,
+        label: <NavLink to={APP_URLS.URL_DASHBOARD} className="sidebar--item flex text-[16px] pl-4 py-3">
+            <span></span>
+            <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={dashboard} alt="" />
+            DashBoard
+        </NavLink>
+    },
+    {
+        key: 5,
+        label: <NavLink to={APP_URLS.URL_ORDERS} className="sidebar--item flex text-[16px] pl-4 py-3">
+            <span></span>
+            <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={orders} alt="" />
+            Orders
+        </NavLink>
+    }, {
+        key: 1,
+        label: <NavLink to={APP_URLS.URL_PRODUCTS} className="sidebar--item flex text-[16px] w-full h-full pl-4 py-3">
+            <span></span>
+            <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={iconShoe} alt="" />
+            Products
+        </NavLink>
+    }, {
+        key: 3,
+        label: <NavLink to={APP_URLS.URL_CUSTOMERS} className="sidebar--item flex text-[16px] pl-4 py-3">
+            <span></span>
+            <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={cutomers} alt="" />
+            Customers
+        </NavLink>
+    }, {
+        key: 2,
+        label: <NavLink to={APP_URLS.URL_BRAND_CATEGORY} className="sidebar--item flex text-[16px] pl-4 py-3">
+            <span></span>
+            <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={brand} alt="" />
+            Brands
+        </NavLink>
+    },
+    // {
+    //     key: 4,
+    //     label: <NavLink to={APP_URLS.URL_COMMENTS} className="sidebar--item flex text-[16px] pl-4 py-3">
+    //         <span></span>
+    //         <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={comment} alt="" />
+    //         Comments
+    //     </NavLink>
 
-        }, {
-            key: 2,
-            label: <NavLink to={APP_URLS.URL_BRAND_CATEGORY} className="sidebar--item flex text-[16px] pl-4 py-3">
-                <span></span>
-                <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={brand} alt="" />
-                Brands
-            </NavLink>
-        }, {
-            key: 3,
-            label: <NavLink to={APP_URLS.URL_CUSTOMERS} className="sidebar--item flex text-[16px] pl-4 py-3">
-                <span></span>
-                <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={cutomers} alt="" />
-                Customers
-            </NavLink>
-        }, {
-            key: 4,
-            label: <NavLink to={APP_URLS.URL_COMMENTS} className="sidebar--item flex text-[16px] pl-4 py-3">
-                <span></span>
-                <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={comment} alt="" />
-                Comments
-            </NavLink>
-
-        }, {
-            key: 6,
-            label: <NavLink to={APP_URLS.URL_ACCOUNT} className="sidebar--item flex text-[16px] pl-4 py-3">
-                <span></span>
-                <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={account} alt="" />
-                Profile
-            </NavLink>
-        }, {
-            key: 7,
-            label: <NavLink to={APP_URLS.URL_CHANGE_PASSWORD} className="sidebar--item flex text-[16px] pl-4 py-3">
-                <span></span>
-                <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={key} alt="" />
-                Password
-            </NavLink>
-        },
+    // },
+    {
+        key: 6,
+        label: <NavLink to={APP_URLS.URL_ACCOUNT} className="sidebar--item flex text-[16px] pl-4 py-3">
+            <span></span>
+            <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={account} alt="" />
+            Profile
+        </NavLink>
+    }, {
+        key: 7,
+        label: <NavLink to={APP_URLS.URL_CHANGE_PASSWORD} className="sidebar--item flex text-[16px] pl-4 py-3">
+            <span></span>
+            <img className="w-[25px] h-[25px] object-cover object-center mr-2" src={key} alt="" />
+            Password
+        </NavLink>
+    },
     ]
 
     const header = useSelector(headerSelector)

@@ -33,13 +33,12 @@ const AccountInformation = (props) => {
         }
     }
 
-
     const getProvinces = async () => {
         const response = await dispatch(getProvinceAsync())
-        setProvinces(response.payload.map((item) => {
+        setProvinces(response.payload.data.map((item) => {
             return {
-                value: item.code,
-                label: item.name
+                value: item.ProvinceID,
+                label: item.ProvinceName
             }
         }))
     }
@@ -47,10 +46,10 @@ const AccountInformation = (props) => {
     const getDistrictByProvince = async (value) => {
         if (value) {
             const response = await dispatch(getDistrictByProvinceAsync(value))
-            setDistricts(response.payload.districts?.map((item) => {
+            setDistricts(response.payload.data?.map((item) => {
                 return {
-                    value: item.code,
-                    label: item.name
+                    value: item.DistrictID,
+                    label: item.DistrictName
                 }
             }))
         }
@@ -59,10 +58,11 @@ const AccountInformation = (props) => {
     const getWardByDistrict = async (value) => {
         if (value) {
             const response = await dispatch(getWardByDistrictAsync(value))
-            setWards(response.payload.wards?.map((item) => {
+            console.log(response)
+            setWards(response.payload.data?.map((item) => {
                 return {
-                    value: item.code,
-                    label: item.name
+                    value: item.WardCode,
+                    label: item.WardName
                 }
             }))
         }
@@ -83,16 +83,30 @@ const AccountInformation = (props) => {
 
     useEffect(() => {
         getProvinces()
-        getDistrictByProvince(admin.province)
-        getWardByDistrict(admin.district)
+        if (admin.province !== '') {
+            getDistrictByProvince(+admin.province)
+        }
+        if (admin.district !== '') {
+            getWardByDistrict(+admin.district)
+        }
         formAccount.setFieldsValue({
-            ...admin,
             createAt: ConvertDate(admin.createAt),
-            province: +admin.province,
-            district: +admin.district,
-            ward: +admin.ward
-
+            email: admin.email,
+            firstName: admin.firstName,
+            lastName: admin.lastName,
+            mobile: admin.mobile,
+            gender: admin.gender,
+            address: admin.address,
         })
+        if (admin.province !== '') {
+            formAccount.setFieldValue('province', +admin.province)
+        }
+        if (admin.district !== '') {
+            formAccount.setFieldValue('district', +admin.district)
+        }
+        if (admin.ward !== '') {
+            formAccount.setFieldValue('ward', admin.ward)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

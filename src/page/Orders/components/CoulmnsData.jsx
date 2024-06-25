@@ -31,11 +31,19 @@ export default ({ paging },
             width: 60,
             align: 'center'
         }, {
+            title: 'Code',
+            dataIndex: 'code',
+            key: 'code',
+            width: 170,
+            align: 'center',
+            hidden: hiddenColumn
+        }, {
             title: 'Update',
             dataIndex: 'updateByUser',
             key: 'updateByUser',
             width: 80,
             align: 'center',
+            hidden: hiddenColumn,
             render: (_, record) => <p>{record.updateByUser !== null && <i className="text-red-custom fa-solid fa-check"></i>}</p>,
         }, {
             title: 'Update Date',

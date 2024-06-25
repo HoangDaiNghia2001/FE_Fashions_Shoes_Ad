@@ -69,8 +69,7 @@ const PageOrders = (props) => {
     }
 
     const filterOrders = async (values) => {
-        const response = await dispatch(filterOrdersAsync(values))
-        console.log(response)
+        await dispatch(filterOrdersAsync(values))
     }
 
     const handleUpdateOrder = async (value, record) => {

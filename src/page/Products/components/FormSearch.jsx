@@ -115,8 +115,8 @@ const FormSearch = (props) => {
         >
             <Flex wrap="wrap" justify='space-between'>
                 <Form.Item
-                    label={<p className="text-eclipse text-[16.5px] tracking-[0.75px] font-semibold">Id Product</p>}
-                    name="id"
+                    label={<p className="text-eclipse text-[16.5px] tracking-[0.75px] font-semibold">Code</p>}
+                    name="code"
                     style={{
                         width: 235,
                         marginBottom: 10

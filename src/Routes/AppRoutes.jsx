@@ -17,6 +17,7 @@ import { notification } from 'antd';
 import ErrorPage from "page/ErrorPage"
 import PageBrands from "page/BrandAndCategory"
 import PagePassword from "page/Password"
+import PageDashBoard from "page/DashBoard"
 
 const AppRoutes = () => {
     // notification
@@ -42,8 +43,9 @@ const AppRoutes = () => {
             </Route>
 
             <Route element={<PrivateRoutes />} >
+                <Route path={APP_URLS.URL_DASHBOARD} element={<MainPage page={<PageDashBoard openNotification={openNotification} />} />} />
                 <Route path={APP_URLS.URL_PRODUCTS} element={<MainPage page={<PageProducts openNotification={openNotification} />} />} />
-                <Route path={APP_URLS.URL_CUSTOMERS} element={<MainPage page={<PageCustomers />} />} />
+                <Route path={APP_URLS.URL_CUSTOMERS} element={<MainPage page={<PageCustomers openNotification={openNotification} />} />} />
                 <Route path={APP_URLS.URL_ACCOUNT} element={<MainPage page={<PageAccount openNotification={openNotification} />} />} />
                 <Route path={APP_URLS.URL_COMMENTS} element={<MainPage page={<PageComments />} />} />
                 <Route path={APP_URLS.URL_ORDERS} element={<MainPage page={<PageOrders openNotification={openNotification} />} />} />

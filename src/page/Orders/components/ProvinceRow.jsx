@@ -8,8 +8,8 @@ const ProvinceRow = (props) => {
     const [province, setProvince] = useState('')
     const getProvinceName = async (value) => {
         const response = await dispatch(getProvinceAsync())
-        const provinces = response.payload.filter(item => item.code === value)
-        return (provinces[0].name)
+        const provinces = response.payload.data.filter(item => item.ProvinceID === value)
+        return (provinces[0].ProvinceName)
     }
 
     useEffect(() => {

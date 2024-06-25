@@ -10,15 +10,15 @@ const WardRow = (props) => {
 
     const getWardName = async (value) => {
         const response = await dispatch(getWardByDistrictAsync(props.district))
-        const wards = response.payload.wards.filter(item => item.code === value)
-        return (wards[0].name)
+        const wards = response.payload.data.filter(item => item.WardCode === value)
+        return (wards[0].WardName)
     }
 
     useEffect(() => {
         // Immediately Invoked Function Expression (IIFE)
         (async () => {
             try {
-                const res = await getWardName(+props.ward);
+                const res = await getWardName(props.ward);
                 setWard(res)
             } catch (error) {
                 console.error('Error fetching data:', error);

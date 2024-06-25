@@ -15,13 +15,12 @@ const handleError = async (error) => {
     const { response = {}, config } = error;
     const { data, status, statusText } = response;
     const originalRequest = config
-    if (data.message === 'Access Denied'
-        && data.status === 403
-        && data.error === 'Forbidden'
-        && !originalRequest._retry) {
+    if ((data.status === 403 && data.error === 'Forbidden' && !originalRequest._retry) ||
+        (status === 500 && !originalRequest._retry)) {
         originalRequest._retry = true;
         // refresh lai token
         const res = await refreshTokenService()
+        console.log(res.data.message)
         if (res.data.status === 500 || !res.data.success) {
             // refresh token het han
             console.log(res.data.message)
@@ -30,7 +29,6 @@ const handleError = async (error) => {
         return request(originalRequest);
     }
     return { data, status, statusText };
-
 };
 
 request.interceptors.request.use((config) => {

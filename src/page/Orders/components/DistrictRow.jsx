@@ -9,9 +9,9 @@ const DistrictRow = (props) => {
     const [district, setDistrict] = useState('')
 
     const getDistrictName = async (value) => {
-        const response = await dispatch(getDistrictByProvinceAsync(props.province))
-        const districts = response.payload.districts.filter(item => item.code === value)
-        return (districts[0].name)
+        const response = await dispatch(getDistrictByProvinceAsync(+props.province))
+        const districts = response.payload.data.filter(item => item.DistrictID === value)
+        return (districts[0].DistrictName)
     }
 
     useEffect(() => {
