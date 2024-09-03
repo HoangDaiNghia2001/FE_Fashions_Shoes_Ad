@@ -16,6 +16,7 @@ const FormSearch = (props) => {
     const [showFormSearch, setShowFormSearch] = useState(false)
 
     const onFinish = (values) => {
+        console.log(values);
         setPaging({
             ...values,
             pageIndex: 1,
@@ -165,6 +166,18 @@ const FormSearch = (props) => {
                         options={wards}
                     />
                 </Form.Item>
+
+                <Form.Item
+                    name="inactive"
+                    valuePropName="checked"
+                    style={{
+                        width: 235
+                    }}
+                >
+                    <Checkbox>
+                        <p className="text-eclipse text-[16.5px] tracking-[0.75px] font-semibold">Account disabled</p>
+                    </Checkbox>
+                </Form.Item>
             </Flex>
         </Form>
 
@@ -172,9 +185,9 @@ const FormSearch = (props) => {
             <Flex justify='space-between' align='center'>
                 <div>
                     <button type="reset" form="formSearchUser" className={`custom-btn w-[110px] px-5 py-[5px] mr-3 text-[14px] rounded-[8px] ${!showFormSearch && 'hidden'}`}>Reset</button>
-                    <button type="submmit" form="formSearchUser" className={`custom-btn w-[110px] px-7 py-[5px] mr-3 text-[14px] rounded-[8px] ${!showFormSearch && 'hidden'}`}>Search</button>
+                    <button type="submit" form="formSearchUser" className={`custom-btn w-[110px] px-7 py-[5px] mr-3 text-[14px] rounded-[8px] ${!showFormSearch && 'hidden'}`}>Search</button>
                     <Checkbox onChange={handleSearchUsers} style={{ fontSize: '16px', fontWeight: '600' }}>
-                        Search Users
+                        Search Customers
                     </Checkbox>
                 </div>
 

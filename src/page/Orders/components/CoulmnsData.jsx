@@ -120,8 +120,8 @@ export default ({ paging },
             align: 'center'
         }, {
             title: 'Alternate Phone',
-            dataIndex: 'alternatePhone',
-            key: 'alternatePhone',
+            dataIndex: 'alternatePhoneNumber',
+            key: 'alternatePhoneNumber',
             width: 135,
             hidden: hiddenColumn,
             align: 'center'
@@ -142,7 +142,7 @@ export default ({ paging },
         {
             title: 'Address',
             dataIndex: 'address',
-            key: 'adrress',
+            key: 'address',
             ellipsis: true,
             width: 220,
             hidden: hiddenColumn
@@ -182,23 +182,23 @@ export default ({ paging },
             width: 120,
             render: (_, record) => <p>{record.totalPrice.toLocaleString()}<sup>đ</sup></p>
         }, {
-            title: 'Notes',
-            dataIndex: 'notes',
-            key: 'notes',
+            title: 'Note',
+            dataIndex: 'note',
+            key: 'note',
             width: 180,
             ellipsis: true,
         }, {
-            title: 'Order Status',
-            dataIndex: 'statusOrder',
-            key: 'statusOrder',
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
             width: 140,
             align: 'center',
             render: (_, record) => {
-                const index = LIST_ORDER_STATUS.findIndex(item => item['value'] === record.statusOrder)
+                const index = LIST_ORDER_STATUS.findIndex(item => item['value'] === record.status)
                 const listStatusOrders = LIST_ORDER_STATUS.slice(index, index + 2)
                 return <Select
                     options={listStatusOrders}
-                    defaultValue={record.statusOrder}
+                    value={record.status}
                     onChange={(value) => handleUpdateOrder(value, record)}
                     style={{ width: '100%' }} />
             }

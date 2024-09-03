@@ -1,12 +1,13 @@
-import { Flex, Popconfirm, Spin, Table } from "antd"
+import { Flex, notification, Popconfirm, Spin, Table } from "antd"
 import { useForm } from "antd/es/form/Form"
 import { useEffect, useState } from "react"
 import FormSearch from "./Components/FormSearch"
 import generateColumnData from "./Components/ColumnsData"
 import ModalUser from "./Components/ModalUser"
 import { useDispatch, useSelector } from "react-redux"
-import { customersSelector, deleteSomeUsersAsync, deleteUserAsync, filtertUsersAsync } from "./CustomersSlice"
+import { customersSelector, deactivateUserAsync, deleteSomeUsersAsync, deleteUserAsync, filterUsersAsync, reactivateUserAsync } from "./CustomersSlice"
 import { ordersSelector } from "page/Orders/OrdersSlice"
+import { TabTile } from "utils/TabTile"
 
 const PageCustomers = (props) => {
     const { openNotification } = props
@@ -97,6 +98,24 @@ const PageCustomers = (props) => {
         setIsModalUserOpen(true)
     }
 
+    const handleDeactivateUser = async (record) => {
+        const response = await dispatch(deactivateUserAsync(record.id))
+        if (response.payload.success) {
+            openNotification(response.payload.message, 'success')
+        } else {
+            openNotification(response.payload.message, 'error')
+        }
+    }
+
+    const handleReactivateUser = async (record) => {
+        const response = await dispatch(reactivateUserAsync(record.id))
+        if (response.payload.success) {
+            openNotification(response.payload.message, 'success')
+        } else {
+            openNotification(response.payload.message, 'error')
+        }
+    }
+
     const handleChangePage = (page) => {
         setPaging({
             ...formSearchUser.getFieldsValue(),
@@ -110,12 +129,18 @@ const PageCustomers = (props) => {
         { hiddenColumn: hiddenColumn },
         { handleUpdateUser: handleUpdateUser },
         { handleDeleteUser: handleDeleteUser },
-        { deleteSome: deleteSome }
+        { deleteSome: deleteSome },
+        { handleDeactivateUser: handleDeactivateUser },
+        { handleReactivateUser: handleReactivateUser }
     )
 
     const filterUsers = async (params) => {
-        await dispatch(filtertUsersAsync(params))
+        await dispatch(filterUsersAsync(params))
     }
+
+    useEffect(() => {
+        TabTile("Customers")
+    }, [])
 
     useEffect(() => {
         filterUsers(paging)

@@ -38,3 +38,17 @@ export const getAllRolesService = () => {
         method: 'GET'
     })
 }
+
+export const deactivateUserService = (param) => {
+    return request(`/api/admin/users/deactivate?id=${param}`, {
+        method: 'PUT',
+        data: param
+    })
+}
+
+export const reactivateUserService = (param) => {
+    return request(`/api/admin/users/reactivate?id=${param}`, {
+        method: 'PUT',
+        data: param
+    })
+}

@@ -15,8 +15,9 @@ const handleError = async (error) => {
     const { response = {}, config } = error;
     const { data, status, statusText } = response;
     const originalRequest = config
-    if ((data.status === 403 && data.error === 'Forbidden' && !originalRequest._retry) ||
-        (status === 500 && !originalRequest._retry)) {
+    if (((data.status === 403 && data.error === 'Forbidden')
+        || (status === 401))
+        && !originalRequest._retry) {
         originalRequest._retry = true;
         // refresh lai token
         const res = await refreshTokenService()

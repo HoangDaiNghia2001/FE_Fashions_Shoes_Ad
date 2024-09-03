@@ -90,7 +90,7 @@ const AccountInformation = (props) => {
             getWardByDistrict(+admin.district)
         }
         formAccount.setFieldsValue({
-            createAt: ConvertDate(admin.createAt),
+            createdAt: ConvertDate(admin.createdAt),
             email: admin.email,
             firstName: admin.firstName,
             lastName: admin.lastName,
@@ -125,7 +125,7 @@ const AccountInformation = (props) => {
             <Flex wrap="wrap" justify='space-between'>
                 <Form.Item
                     label={<p className="text-eclipse text-[16.5px] tracking-[0.75px] font-semibold">Create At</p>}
-                    name="createAt"
+                    name="createdAt"
                     style={{
                         width: '48%',
                         marginBottom: 10
@@ -203,6 +203,12 @@ const AccountInformation = (props) => {
                 <Form.Item
                     label={<p className="text-eclipse text-[16.5px] tracking-[0.75px] font-semibold">Gender</p>}
                     name="gender"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your gender !!!'
+                        },
+                    ]}
                     style={{
                         width: '48%',
                         marginBottom: 10

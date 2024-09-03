@@ -1,5 +1,5 @@
 import { Popconfirm, Tag } from "antd"
-import { Capitalize } from "utils/Capitlalize"
+import { Capitalize } from "utils/Capitalize"
 import { ConvertDate } from "utils/ConvertDate"
 
 // eslint-disable-next-line import/no-anonymous-default-export

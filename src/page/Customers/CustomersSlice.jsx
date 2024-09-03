@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { createUserService, deleteSomeUsersService, deleteUserService, filterUsersService, getAllRolesService, updateUserService } from "service/CustomersService"
+import { createUserService, deactivateUserService, deleteSomeUsersService, deleteUserService, filterUsersService, getAllRolesService, reactivateUserService, updateUserService } from "service/CustomersService"
 
 const initialState = {
     isLoading: false,
@@ -8,7 +8,7 @@ const initialState = {
     totalUser: 0,
 }
 
-export const filtertUsersAsync = createAsyncThunk('filtertUsers', async (params) => {
+export const filterUsersAsync = createAsyncThunk('filtertUsers', async (params) => {
     const response = await filterUsersService(params)
     return response.data
 })
@@ -38,6 +38,16 @@ export const getAllRolesAsync = createAsyncThunk('getAllRoles', async () => {
     return response.data
 })
 
+export const deactivateUserAsync = createAsyncThunk('deactivateUser', async (param) => {
+    const response = await deactivateUserService(param)
+    return response.data
+})
+
+export const reactivateUserAsync = createAsyncThunk('reactivateUser', async (param) => {
+    const response = await reactivateUserService(param)
+    return response.data
+})
+
 export const customers = createSlice({
     name: 'customerSlice',
     initialState,
@@ -45,10 +55,10 @@ export const customers = createSlice({
     extraReducers: builder => {
         builder
 
-            .addCase(filtertUsersAsync.pending, (state) => {
+            .addCase(filterUsersAsync.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(filtertUsersAsync.fulfilled, (state, action) => {
+            .addCase(filterUsersAsync.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.listUsers = action.payload.results.users
                 state.totalUser = action.payload.results.total
@@ -91,6 +101,22 @@ export const customers = createSlice({
             })
             .addCase(getAllRolesAsync.fulfilled, (state) => {
                 state.isLoading = false
+            })
+
+            .addCase(deactivateUserAsync.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deactivateUserAsync.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.userInfor = action.payload
+            })
+
+            .addCase(reactivateUserAsync.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(reactivateUserAsync.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.userInfor = action.payload
             })
     }
 })

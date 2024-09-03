@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Column, Pie, Line } from "@ant-design/charts";
 import generateColumnsTopProducts from "./components/ColumnTopTenProducts"
 import generateColumnsTopUsers from "./components/ColumnDataFiveUsres"
+import { TabTile } from "utils/TabTile";
 
 const PageDashBoard = (props) => {
     const { openNotification } = props;
@@ -179,6 +180,10 @@ const PageDashBoard = (props) => {
     }
 
     useEffect(() => {
+        TabTile("Dashboard")
+    }, [])
+
+    useEffect(() => {
         const fetchData = async () => {
             await Promise.all([
                 countOrders(),
@@ -328,8 +333,8 @@ const PageDashBoard = (props) => {
                     </div>
                     <div className="text-right">
                         <Radio.Group onChange={onChangeChart} value={chartType}>
-                            <Radio value={true}>Chart Line</Radio>
-                            <Radio value={false}>Chart Column</Radio>
+                            <Radio value={true}>Chart Column</Radio>
+                            <Radio value={false}>Chart Line</Radio>
                         </Radio.Group>
                     </div>
                 </>)}

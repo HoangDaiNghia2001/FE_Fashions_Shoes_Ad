@@ -3,7 +3,7 @@ import { LIST_GENDER } from "constant/Variable";
 import { getDistrictByProvinceAsync, getProvinceAsync, getWardByDistrictAsync, ordersSelector } from "page/Orders/OrdersSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Capitalize } from "utils/Capitlalize";
+import { Capitalize } from "utils/Capitalize";
 import { createUserAsync, customersSelector, getAllRolesAsync, updateUserAsync } from "../CustomersSlice";
 
 const ModalUser = (props) => {
@@ -74,7 +74,7 @@ const ModalUser = (props) => {
     const getAllRoles = async () => {
         const response = await dispatch(getAllRolesAsync())
 
-        setRoles(response.payload.map(item => {
+        setRoles(response.payload.results.roles.map(item => {
             return {
                 value: item.name,
                 label: Capitalize(item.name.split(' ')).toString().replaceAll(',', ' ')
@@ -82,7 +82,7 @@ const ModalUser = (props) => {
         }))
     }
 
-    const onFinishformUser = async (values) => {
+    const onFinishFormUser = async (values) => {
         const userRequest = {
             ...values,
             ...{
@@ -148,7 +148,7 @@ const ModalUser = (props) => {
                     price: 0,
                     discountedPercent: 0,
                 }}
-                onFinish={onFinishformUser}
+                onFinish={onFinishFormUser}
             >
                 <Form.Item
                     name="id"
@@ -175,6 +175,12 @@ const ModalUser = (props) => {
                     <Form.Item
                         name="email"
                         label={<p className="text-eclipse text-[16.5px] font-semibold tracking-[0.75px]">Email</p>}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input this field !!!'
+                            },
+                        ]}
                         style={{
                             width: '49%',
                             marginBottom: 20

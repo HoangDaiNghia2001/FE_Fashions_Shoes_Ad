@@ -10,11 +10,12 @@ import {
 } from './BrandsSlice';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Capitalize } from 'utils/Capitlalize';
+import { Capitalize } from 'utils/Capitalize';
 import { useForm } from 'antd/es/form/Form';
 import ModalBrand from './components/ModalBrand';
 import ModalParentCategory from './components/ModalParentCategory';
 import ModalChildCategpry from './components/ModalChildCategory';
+import { TabTile } from 'utils/TabTile';
 
 const PageBrands = (props) => {
 
@@ -290,6 +291,10 @@ const PageBrands = (props) => {
     const onRemoveItem = (e) => {
         setRemove(e.target.checked)
     }
+
+    useEffect(() => {
+        TabTile("Brands")
+    }, [])
 
     useEffect(() => {
         getAllBrandsDetail()

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createNewProductAsync, getAllBrandsAsync, getAllChildCategoriesByParentCategoryIdAsync, getAllParentCategoriesByBrandAsync, updateProductAsync } from "../ProductsSlice";
-import { Capitalize } from "utils/Capitlalize";
+import { Capitalize } from "utils/Capitalize";
 import { ConvertImageToBase64 } from "utils/ConvertImageToBase64";
 
 const FormProduct = (props) => {
@@ -25,7 +25,7 @@ const FormProduct = (props) => {
     // brand
     const getBrands = async () => {
         const response = await dispatch(getAllBrandsAsync())
-        setBrands(response.payload?.map((item) => {
+        setBrands(response.payload.results.map((item) => {
             return {
                 value: item.id,
                 label: Capitalize(item.name.split(' ')).toString().replaceAll(',', ' ')
@@ -45,7 +45,7 @@ const FormProduct = (props) => {
         const response = await dispatch(getAllParentCategoriesByBrandAsync({
             brandId: value
         }))
-        setParentCategories(response.payload?.map((item) => {
+        setParentCategories(response.payload.results.map((item) => {
             return {
                 value: item.id,
                 label: Capitalize(item.name.split(' ')).toString().replaceAll(',', ' ')
@@ -64,7 +64,7 @@ const FormProduct = (props) => {
         const response = await dispatch(getAllChildCategoriesByParentCategoryIdAsync({
             parentCategoryId: value
         }))
-        setChildCategories(response.payload?.map((item) => {
+        setChildCategories(response.payload.results.map((item) => {
             return {
                 value: item.id,
                 label: Capitalize(item.name.split(' ')).toString().replaceAll(',', ' ')
@@ -123,6 +123,7 @@ const FormProduct = (props) => {
             openNotification("Please input size of product !!!", 'error')
         } else {
             const productInfor = { ...values, sizes: sizes }
+            console.log(productInfor)
             let response;
 
             // create or update product

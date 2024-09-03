@@ -76,10 +76,6 @@
     opacity: 0.7;
 }
 
-.ant-form-item .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
-    content: none;
-}
-
 .ant-tooltip {
     display: none;
 }

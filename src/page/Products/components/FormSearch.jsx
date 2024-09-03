@@ -3,7 +3,7 @@ import { LIST_COLORS } from "constant/Variable";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Capitalize } from "utils/Capitlalize";
+import { Capitalize } from "utils/Capitalize";
 import { getAllBrandsAsync, getAllChildCategoriesByParentCategoryIdAsync, getAllParentCategoriesByBrandAsync } from "../ProductsSlice";
 
 const FormSearch = (props) => {
@@ -43,7 +43,7 @@ const FormSearch = (props) => {
     // brand
     const getBrands = async () => {
         const response = await dispatch(getAllBrandsAsync())
-        setBrands(response.payload.map((item) => {
+        setBrands(response.payload.results.map((item) => {
             return {
                 value: item.id,
                 label: Capitalize(item.name.split(' ')).toString().replaceAll(',', ' ')
@@ -61,7 +61,7 @@ const FormSearch = (props) => {
     // parent category
     const getParentCategoryByBrand = async (value) => {
         const response = await dispatch(getAllParentCategoriesByBrandAsync(value))
-        setParentCategories(response.payload.map((item) => {
+        setParentCategories(response.payload.results.map((item) => {
             return {
                 value: item.id,
                 label: Capitalize(item.name.split(' ')).toString().replaceAll(',', ' ')
@@ -79,7 +79,7 @@ const FormSearch = (props) => {
     // child category
     const getChildCategoryByParentCategory = async (value) => {
         const response = await dispatch(getAllChildCategoriesByParentCategoryIdAsync(value))
-        setChildCategories(response.payload.map((item) => {
+        setChildCategories(response.payload.results.map((item) => {
             return {
                 value: item.id,
                 label: Capitalize(item.name.split(' ')).toString().replaceAll(',', ' ')

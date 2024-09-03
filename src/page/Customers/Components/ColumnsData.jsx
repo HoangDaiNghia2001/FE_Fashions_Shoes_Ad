@@ -1,8 +1,8 @@
-import { Popconfirm } from "antd"
+import { Popconfirm, Tag } from "antd"
 import DistrictRow from "page/Orders/components/DistrictRow"
 import ProvinceRow from "page/Orders/components/ProvinceRow"
 import WardRow from "page/Orders/components/WardRow"
-import { Capitalize } from "utils/Capitlalize"
+import { Capitalize } from "utils/Capitalize"
 import { ConvertDate } from "utils/ConvertDate"
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -10,7 +10,9 @@ export default ({ paging },
     { hiddenColumn },
     { handleUpdateUser },
     { handleDeleteUser },
-    { deleteSome }) => {
+    { deleteSome },
+    { handleDeactivateUser },
+    { handleReactivateUser }) => {
     return [
         {
             title: 'ID',
@@ -25,7 +27,7 @@ export default ({ paging },
             render: (_, record, index) => {
                 return <p>{((paging.pageIndex - 1) * paging.pageSize) + index + 1}</p>
             },
-            width: 65,
+            width: 60,
             align: 'center'
         }, {
             title: 'Code',
@@ -37,7 +39,7 @@ export default ({ paging },
             title: 'Created at',
             dataIndex: 'createAt',
             key: 'createAt',
-            render: (_, record) => <p>{ConvertDate(record.createAt)}</p>,
+            render: (_, record) => <p>{ConvertDate(record.createdAt)}</p>,
             width: 150,
             align: 'center',
             hidden: hiddenColumn
@@ -52,7 +54,7 @@ export default ({ paging },
             title: 'First Name',
             dataIndex: 'firstName',
             key: 'firstName',
-            width: 180,
+            width: 140,
             ellipsis: true
         },
         {
@@ -66,12 +68,12 @@ export default ({ paging },
             dataIndex: 'mobile',
             key: 'mobile',
             align: 'center',
-            width: 150,
+            width: 130,
         }, {
             title: 'Gender',
             dataIndex: 'gender',
             key: 'gender',
-            width: 120,
+            width: 100,
             align: 'center',
             render: (_, record) => <p>
                 {Capitalize(record.gender.split(' '))}
@@ -89,7 +91,7 @@ export default ({ paging },
         {
             title: 'Address',
             dataIndex: 'address',
-            key: 'adrress',
+            key: 'address',
             ellipsis: true,
             width: 220,
             hidden: hiddenColumn
@@ -115,6 +117,18 @@ export default ({ paging },
             hidden: hiddenColumn,
             render: (_, record) => <ProvinceRow province={record.province} />,
         }, {
+            title: 'Status',
+            dataIndex: 'active',
+            key: 'active',
+            width: 100,
+            align: 'center',
+            render: (_, record) => <>
+                {
+                    record.active ? <Tag color="green" className="cursor-pointer text-[14px]" onClick={() => handleDeactivateUser(record)} title="If you click here this account will be deactivated">Enable</Tag>
+                        : <Tag color="red" className="cursor-pointer text-[14px]" onClick={() => handleReactivateUser(record)} title="If you click here this account will be reactivated">Disable</Tag>
+                }
+            </>,
+        }, {
             title: 'Action',
             key: 'action',
             width: 100,
@@ -126,18 +140,20 @@ export default ({ paging },
                         className="fa-solid fa-pen-to-square cursor-pointer mx-1 text-green-500 hover:text-green-300"
                         onClick={() => handleUpdateUser(record)}>
                     </i>
-                    <Popconfirm
-                        title="Delete the task"
-                        description="Are you sure to delete this user?"
-                        onConfirm={() => handleDeleteUser(record.id)}
-                        okText="Yes"
-                        cancelText="No"
-                        disabled={deleteSome}
-                    >
-                        <i
-                            title="Delete"
-                            className={`fa-solid fa-trash-can ${!deleteSome ? 'cursor-pointer hover:text-red-400' : 'cursor-no-drop'} mx-2 text-red-custom `}></i>
-                    </Popconfirm>
+                    {
+                        !record.active && <Popconfirm
+                            title="Delete the task"
+                            description="Are you sure to delete this user?"
+                            onConfirm={() => handleDeleteUser(record.id)}
+                            okText="Yes"
+                            cancelText="No"
+                            disabled={deleteSome}
+                        >
+                            <i
+                                title="Delete"
+                                className={`fa-solid fa-trash-can ${!deleteSome ? 'cursor-pointer hover:text-red-400' : 'cursor-no-drop'} mx-2 text-red-custom `}></i>
+                        </Popconfirm>
+                    }
                 </div>
             ),
         },

@@ -25,18 +25,9 @@ const LoginForm = (props) => {
             localStorage.setItem("admin", JSON.stringify(response.payload.results))
             navigate(APP_URLS.URL_DASHBOARD)
         } else {
-            switch (response.payload.status) {
-                case 500:
-                    props.openNotification("Invalid Password !!!", 'error')
-                    break
-                case 403:
-                    props.openNotification('User not found !!!', 'error')
-                    break
-                default:
-                    props.openNotification(response.payload.message, 'error')
-            }
+            props.openNotification(response.payload.message, 'error')
         }
-    };
+    }
 
     useEffect(() => {
         TabTile('Login')

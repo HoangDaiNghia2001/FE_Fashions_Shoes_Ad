@@ -10,7 +10,7 @@ export const loginService = (params) => {
 
 // refresh token
 export const refreshTokenService = () => {
-    return request('/api/refresh/token/admin', {
+    return request('/api/token/admin/refresh', {
         method: 'POST'
     })
 }

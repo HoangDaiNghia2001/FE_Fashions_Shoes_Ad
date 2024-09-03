@@ -1,5 +1,5 @@
 import { Button, Flex, Image, List, Modal } from "antd"
-import { Capitalize } from "utils/Capitlalize"
+import { Capitalize } from "utils/Capitalize"
 
 const ModalOrderDetail = (props) => {
 
@@ -35,7 +35,10 @@ const ModalOrderDetail = (props) => {
                             alt="" />
                         <div className="w-[calc(100%-120px)] ml-3">
                             <p className="text-[14px] text-eclipse mb-1 tracking-[0.5px] font-semibold">
-                                Brand: {Capitalize(item.brand.split(' ')).toString().replaceAll(',', ' ')} - ID: {item.productId}
+                                Brand:
+                                <span className="text-red-custom"> {Capitalize(item.brand.split(' ')).toString().replaceAll(',', ' ')} </span>
+                                - Code:
+                                <span className="text-red-custom"> {item.codeProduct}</span>
                             </p>
                             <div className="flex text-[16.5px] text-eclipse">
                                 <p

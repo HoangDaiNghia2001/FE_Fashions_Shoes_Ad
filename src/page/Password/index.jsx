@@ -2,8 +2,10 @@ import { Form, Input, Spin } from 'antd'
 import { useForm } from 'antd/es/form/Form'
 import { APP_URLS } from 'constant/Variable'
 import { logoutAsync, sendSuccess } from 'page/Login/LoginSlice'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { TabTile } from 'utils/TabTile'
 import { chanegPasswordAsync, passwordSelector } from './PasswordSlice'
 import './Style.css'
 
@@ -39,6 +41,10 @@ const PagePassword = (props) => {
             openNotification(response.payload.message, 'error')
         }
     }
+
+    useEffect(() => {
+        TabTile("My Password")
+    }, [])
 
     return <Spin tip="Loading" size="large" spinning={password.isLoading}>
         <div className='page-passwors h-[calc(screen-80px)] flex px-4 pb-7 pt-[15px] bg-white'>

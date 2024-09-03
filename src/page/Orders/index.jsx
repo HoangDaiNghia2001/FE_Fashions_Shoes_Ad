@@ -75,11 +75,11 @@ const PageOrders = (props) => {
     const handleUpdateOrder = async (value, record) => {
         switch (value) {
             case STATUS_ORDER.CONFIRMED:
-                const confrimed = await dispatch(confirmedOrderAsync(record.id))
-                if (confrimed.payload.success) {
-                    openNotification(confrimed.payload.message, 'success')
+                const confirmed = await dispatch(confirmedOrderAsync(record.id))
+                if (confirmed.payload.success) {
+                    openNotification(confirmed.payload.message, 'success')
                 } else {
-                    openNotification(confrimed.payload.message, 'error')
+                    openNotification(confirmed.payload.message, 'error')
                 }
                 break;
             case STATUS_ORDER.SHIPPED:

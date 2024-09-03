@@ -12,14 +12,14 @@ export default () => {
             render: (_, record, index) => {
                 return <p>{((pagingTopUsers.pageIndex - 1) * pagingTopUsers.pageSize) + index + 1}</p>
             },
-            width: 65,
+            width: 100,
             align: 'center'
         }, {
-            title: 'ID',
-            dataIndex: 'id',
-            key: 'id',
+            title: 'Code',
+            dataIndex: 'code',
+            key: 'code',
             align: 'center',
-            width: 65
+            width: 200
         }, {
             title: 'Email',
             dataIndex: 'email',
@@ -30,12 +30,14 @@ export default () => {
             dataIndex: 'fullName',
             key: 'fullName',
             ellipsis: true,
+            width: 220,
             render: (_, record) => <p>{record.lastName + ' ' + record.firstName}</p>
         }, {
             title: 'Phone',
             dataIndex: 'phone',
             key: 'phone',
             align: 'center',
+            width: 150,
         }, {
             title: 'Gender',
             dataIndex: 'gender',
@@ -47,6 +49,7 @@ export default () => {
             dataIndex: 'totalPrice',
             key: 'totalPrice',
             align: 'center',
+            width: 200,
             render: (_, record) => <p>{record.totalPrice.toLocaleString()}<sup>vnđ</sup></p>
         }
     ]
